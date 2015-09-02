@@ -98,6 +98,10 @@ func NewCluster(scheduler *scheduler.Scheduler, TLSConfig *tls.Config, master st
 		cluster.dockerEnginePort = defaultDockerEngineTLSPort
 	}
 
+	if dockerEnginePort, ok := options.Uint("docker.port", "SWARM_DOCKER_PORT"); ok {
+		cluster.dockerEnginePort = uint16(dockerEnginePort)
+	}
+
 	if bindingPort, ok := options.Uint("mesos.port", "SWARM_MESOS_PORT"); ok {
 		driverConfig.BindingPort = uint16(bindingPort)
 	}
